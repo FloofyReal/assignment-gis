@@ -5,11 +5,13 @@
 <title>Date Helper</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link href="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css" rel="stylesheet" />
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="static/css/style.css" type="text/css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -42,15 +44,14 @@
                         <label>Shops options</label>
                         <form>
                             <div>
-                            <label><input type="checkbox" name="choice01" value="supermarket">Supermarket</label>
-                            <label><input type="checkbox" name="choice02" value="newsagent">Trafika</label>
-                            <label><input type="checkbox" name="choice03" value="flowers">Kvety</label>
-                            <label><input type="checkbox" name="choice04" value="gas">Pumpa</label>
+                            <label><input type="checkbox" id="ch1" name="choice01" value="supermarket">Supermarket</label>
+                            <label><input type="checkbox" id="ch2" name="choice02" value="newsagent">Trafika</label>
+                            <label><input type="checkbox" id="ch3" name="choice03" value="flowers">Kvety</label>
                             <input id="ex6" type="text">
                             <label> Vzdialenosť v metroch</label>
 
                             </div>
-                        <button type="submit" class="btn btn-default" id="btn_shop">Find</button>
+                        <button type="submit" class="btn btn-default" id="btn_shop">Najdi</button>
                         </form>
                         <!-- 
                         <input id="sld_distance" data-slider="slider_distance" data-slider-id="Distance1Sld" type="text" data-slider-min="100" data-slider-max="3000" data-slider-step="100" data-slider-value="500"/>
@@ -64,6 +65,8 @@
                 <div class="container">
                     <div>
                         <label>Parks</label>
+                        <label>Vsetky parkove cesticky na prechadzky</label>
+                        <button type="submit" class="btn btn-default" id="btn_parks">Najdi</button>
                     </div>
                 </div>
             </div>
