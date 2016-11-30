@@ -20,8 +20,8 @@ Build a map-based application, which lets the user see geo-based data on a map a
 
 Fill in (either in English, or in Slovak):
 
-**Application description**: `<fill in>`
+**Application description**: `Date Helper`
 
-**Data source**: `<fill in>`
+**Data source**: `<OSM data dump of Slovakia>`
 
-**Technologies used**: `PostGis, PSGCOG2`
+**Technologies used**: `PostGis, PSGCOG2, CherryPy`
