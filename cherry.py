@@ -15,9 +15,7 @@ class DateHelper(object):
 @cherrypy.expose
 class DateHelperWebService(object):
 
-    conn = psycopg2.connect("dbname=gisproject user=floofy")
 
-    cur = conn.cursor()
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
         return cherrypy.session['mystring']
@@ -32,6 +30,26 @@ class DateHelperWebService(object):
 
     def DELETE(self):
         cherrypy.session.pop('mystring', None)
+
+class Newsagents:
+
+    exposed = True
+
+    def GET(self):
+        conn = psycopg2.connect("dbname=gisproject user=floofy")
+        cur = conn.cursor()
+        cur.execute("""
+            with MHDtickets as (
+            select name, amenity, shop, way from planet_osm_polygon
+            where shop = 'newsagent'
+            union
+            select name, amenity, shop, way from planet_osm_point
+            where shop = 'newsagent')
+            select ST_AsGeoJSON(st_transform(ST_SetSRID(m.way, 4326), 4326))::json from MHDtickets m
+            """)
+        data = cur.fetchall()
+        reply = json.dumps(data)
+        return reply 
 
 
 if __name__ == '__main__':
@@ -50,6 +68,15 @@ if __name__ == '__main__':
             'tools.staticdir.dir': './public'
         }
     }
+
+    cherrypy.tree.mount(
+        Newsagents(), '/api/newsagents',
+        {'/':
+            {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
+        }
+    )
+
     webapp = DateHelper()
     webapp.generator = DateHelperWebService()
+
     cherrypy.quickstart(webapp, '/', conf)
