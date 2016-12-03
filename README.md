@@ -8,7 +8,7 @@ Ever was in a situation, that your lovely SO didn't want to sit another evening 
 2. Local server with [PostGIS](http://postgis.net/) and an API layer that exposes data in a [geojson format](http://geojson.org/) using CherryPy as dedicated server and MapBox.js API to help with useful GeoJSON functions.
 3. The user-facing web application which calls the API and lets the user see and navigate in the map and shows the geodata. You can (and should) use existing components, such as the Mapbox SDK, or [Leaflet](http://leafletjs.com/).
 
-## Example projects
+## Example of use
 
 - Showing nearby (or rather ALL) shops by choice (Supermarkets, Florists, Newsagents and Fuel stations).
 - Showing nearby (or rather ALL) parks with existing paths for walking OR parks that are nearby water areas (even without paths - Let's go for an adventure!)
