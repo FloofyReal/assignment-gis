@@ -1,10 +1,4 @@
-*This is a documentation for a fictional project, just to show you what I expect. Notice a few key properties:*
-- *no cover page, really*
-- *no copy&pasted assignment text*
-- *no code samples*
-- *concise, to the point, gets me a quick overview of what was done and how*
-- *I don't really care about the document length*
-- *I used links where appropriate*
+*I almost shamelessly totally riped of base documentation of fiit-pdt user, for which I thanks for understanding*
 
 # Overview
 
