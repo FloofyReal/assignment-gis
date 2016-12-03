@@ -1,6 +1,5 @@
-import os, os.path
-import random
-import string
+import os
+import os.path
 import psycopg2
 import json
 import cherrypy
@@ -30,13 +29,13 @@ class Newsagents(object):
         listt = []
         while True:
             row = cur.fetchone()
-            if row == None:
+            if row is None:
                 break
             else:
                 listt.append(row[0])
-                print("%s" % row[0]) 
+                print("%s" % row[0])
         reply = json.dumps(listt)
-        return reply 
+        return reply
 
 
 @cherrypy.expose
@@ -57,13 +56,13 @@ class Supermarkets(object):
         listt = []
         while True:
             row = cur.fetchone()
-            if row == None:
+            if row is None:
                 break
             else:
                 listt.append(row[0])
-                print("%s" % row[0]) 
+                print("%s" % row[0])
         reply = json.dumps(listt)
-        return reply 
+        return reply
 
 
 @cherrypy.expose
@@ -84,13 +83,13 @@ class Flowers(object):
         listt = []
         while True:
             row = cur.fetchone()
-            if row == None:
+            if row is None:
                 break
             else:
                 listt.append(row[0])
-                print("%s" % row[0]) 
+                print("%s" % row[0])
         reply = json.dumps(listt)
-        return reply 
+        return reply
 
 
 @cherrypy.expose
@@ -111,13 +110,13 @@ class Gas(object):
         listt = []
         while True:
             row = cur.fetchone()
-            if row == None:
+            if row is None:
                 break
             else:
                 listt.append(row[0])
-                print("%s" % row[0]) 
+                print("%s" % row[0])
         reply = json.dumps(listt)
-        return reply 
+        return reply
 
 
 @cherrypy.expose
@@ -129,33 +128,32 @@ class Parks(object):
         cur.execute("""
         with walkpaths as (
             select name, way, highway from public.planet_osm_line
-	    where highway = 'path'
-	    or highway = 'footway'
-	),
-        parks as (
-	    select name, way, leisure from public.planet_osm_polygon
-	    where leisure = 'park'
-	)
+            where highway = 'path'
+            or highway = 'footway'
+        ), parks as (
+            select name, way, leisure from public.planet_osm_polygon
+            where leisure = 'park'
+        )
         select ST_AsGeoJSON(ST_Transform(prk.way, 4326))::json from walkpaths p, parks prk
         where st_intersects(p.way, prk.way)
             """)
         listt = []
         while True:
             row = cur.fetchone()
-            if row == None:
+            if row is None:
                 break
             else:
                 listt.append(row[0])
-                print("%s" % row[0]) 
+                print("%s" % row[0])
         reply = json.dumps(listt)
-        return reply 
+        return reply
 
 
 @cherrypy.expose
 class Parks_water(object):
 
     def GET(self, distance=None):
-        if distance == None:
+        if distance is None:
             distance = 0
         distance = str(distance)
         conn = psycopg2.connect("dbname=gisproject user=floofy")
@@ -180,53 +178,59 @@ class Parks_water(object):
         listt = []
         while True:
             row = cur.fetchone()
-            if row == None:
+            if row is None:
                 break
             else:
                 listt.append(row[0])
-                print("%s" % row[0]) 
+                print("%s" % row[0])
         reply = json.dumps(listt)
-        return reply 
+        return reply
 
 
 cherrypy.tree.mount(
     Newsagents(), '/api/newsagents',
-    {'/':
+    {
+        '/':
         {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
     }
 )
 
 cherrypy.tree.mount(
     Supermarkets(), '/api/supermarkets',
-    {'/':
+    {
+        '/':
         {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
     }
 )
 
 cherrypy.tree.mount(
     Flowers(), '/api/flowers',
-    {'/':
+    {
+        '/':
         {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
     }
 )
 
 cherrypy.tree.mount(
     Gas(), '/api/gas',
-    {'/':
+    {
+        '/':
         {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
     }
 )
 
 cherrypy.tree.mount(
     Parks(), '/api/parks',
-    {'/':
+    {
+        '/':
         {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
     }
 )
 
 cherrypy.tree.mount(
     Parks_water(), '/api/parks_water',
-    {'/':
+    {
+        '/':
         {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
     }
 )
