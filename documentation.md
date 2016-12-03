@@ -44,9 +44,13 @@ Other GETs are using only a basic definition, because my proximity queries weren
 There other parts of api are:
 
 `GET /api/supermarkets`
+
 `GET /api/newsagents`
+
 `GET /api/flowers`
+
 `GET /api/gas`
+
 `GET /api/parks`
 
 
@@ -54,3 +58,11 @@ There other parts of api are:
 
 API calls return json responses with JSON filled with query returns (default types of GeoJSON: Point, Polygon, ...).
 The are then parsed in map.js to be in correct GeoJSON form for Mapbox to accept them.
+
+
+## Instalation and use
+
+virtualenv <name of a folder> - Create new virtual enviroment for Python 3
+source <name of a folder>/bin/activate - Active virtual enviroment
+[sudo] pip install -r misc/requirements.txt - Install all dependecies
+python cherry.py - Start a server which listents on localhost:8080
