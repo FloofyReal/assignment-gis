@@ -1,16 +1,17 @@
-# General course assignment
+# Date Helper
 
-Build a map-based application, which lets the user see geo-based data on a map and filter/search through it in a meaningfull way. Specify the details and build it in your language of choice. The application should have 3 components:
+## Intro
+Ever was in a situation, that your lovely SO didn't want to sit another evening in front of yet another TV series? Did you ever feel you want to impress a girl, but find yourself lacking useful Geological information? Well, today is your lucky day, because with Date Helper, you will give her above average time with B+ for trying!
 
-1. Custom-styled background map, ideally built with [mapbox](http://mapbox.com). Hard-core mode: you can also serve the map tiles yourself using [mapnik](http://mapnik.org/) or similar tool.
-2. Local server with [PostGIS](http://postgis.net/) and an API layer that exposes data in a [geojson format](http://geojson.org/).
-3. The user-facing application (web, android, ios, your choice..) which calls the API and lets the user see and navigate in the map and shows the geodata. You can (and should) use existing components, such as the Mapbox SDK, or [Leaflet](http://leafletjs.com/).
+
+1. Custom-styled background map, ideally built with [mapbox](http://mapbox.com).
+2. Local server with [PostGIS](http://postgis.net/) and an API layer that exposes data in a [geojson format](http://geojson.org/) using CherryPy as dedicated server and MapBox.js API to help with useful GeoJSON functions.
+3. The user-facing web application which calls the API and lets the user see and navigate in the map and shows the geodata. You can (and should) use existing components, such as the Mapbox SDK, or [Leaflet](http://leafletjs.com/).
 
 ## Example projects
 
-- Showing nearby landmarks as colored circles, each type of landmark has different circle color and the more interesting the landmark is, the bigger the circle. Landmarks are sorted in a sidebar by distance to the user. It is possible to filter only certain landmark types (e.g., castles).
-
-- Showing bicykle roads on a map. The roads are color-coded based on the road difficulty. The user can see various lists which help her choose an appropriate road, e.g. roads that cross a river, roads that are nearby lakes, roads that pass through multiple countries, etc.
+- Showing nearby (or rather ALL) shops by choice (Supermarkets, Florists, Newsagents and Fuel stations).
+- Showing nearby (or rather ALL) parks with existing paths for walking OR parks that are nearby water areas (even without paths - Let's go for an adventure!)
 
 ## Data sources
 
@@ -24,4 +25,4 @@ Fill in (either in English, or in Slovak):
 
 **Data source**: `<OSM data dump of Slovakia>`
 
-**Technologies used**: `PostGis, PSGCOG2, CherryPy`
+**Technologies used**: `PostGis, PSGCOG2, CherryPy, Mapbox`
