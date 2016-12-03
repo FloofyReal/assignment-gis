@@ -9,9 +9,6 @@ var floristLayer = L.mapbox.featureLayer().addTo(map);
 var gasLayer = L.mapbox.featureLayer().addTo(map);
 var newsagentsLayer = L.mapbox.featureLayer().addTo(map);
 
-    if('spm' === 'gas'){
-        console.log("Piča");
-    }
 
 $('#btn_shop').on('click', function () {
     var supermarket = document.getElementById("chs01").checked;
@@ -83,6 +80,64 @@ $('#btn_parks').on('click', function () {
         }
     });
 });
+
+$('#btn_parks_water').on('click', function () {
+    var distance = document.getElementById("input_dist_water_parks").value;
+    console.log(distance);
+    var url = "http://localhost:8080/api/parks_water/";
+    var new_url = url.concat(distance);
+    console.log(new_url);
+    $.ajax({
+        type: 'GET',
+        url: new_url,
+        datatype: "json",
+        success: function (result) {
+            console.log('start');
+            featureLayer.setGeoJSON(parse_to_geoJSON(result));
+        }
+    });
+});
+
+$(document).ready(function(lat, lng){
+if (navigator.geolocation) {
+    var location_timeout = setTimeout("geolocFail()", 10000);
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        clearTimeout(location_timeout);
+
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        var meGeo = {
+      "type": "Feature",
+      "properties": {
+        "title": "Som TU!",
+        "marker-color": "#000000",
+        "marker-size": "medium",
+        "marker-symbol": "circle-stroked"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+            lng,
+            lat
+        ]
+      }
+    };
+        console.log(meGeo);
+        featureLayer.setGeoJSON(meGeo);
+
+        document.getElementById("location_id").innerHTML = '[' + lat.toFixed(3) +
+            ' : ' + lng.toFixed(3) + ']'; 
+    }, function(error) {
+        clearTimeout(location_timeout);
+        geolocFail();
+    });
+} else {
+    // Fallback for no geolocation
+    geolocFail();
+}
+});
+
 
 function parse_to_geoJSON(geometry, title) {
     var spm = 'spm';
@@ -181,7 +236,7 @@ function parse_to_geoJSON(geometry, title) {
                       "type": "Feature",
                       "properties": {
                         "fill": "#704688",
-                        "fill-opacity": 0.5,
+                        "fill-opacity": 0.4,
                         "stroke": "#555555",
                         "stroke-width": 2,
                         "stroke-opacity": 0.2

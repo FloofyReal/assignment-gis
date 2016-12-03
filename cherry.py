@@ -120,7 +120,6 @@ class Gas(object):
         return reply 
 
 
-
 @cherrypy.expose
 class Parks(object):
 
@@ -133,13 +132,51 @@ class Parks(object):
 	    where highway = 'path'
 	    or highway = 'footway'
 	),
-        forests as (
+        parks as (
 	    select name, way, leisure from public.planet_osm_polygon
 	    where leisure = 'park'
 	)
-        select ST_AsGeoJSON(ST_Transform(f.way, 4326))::json from walkpaths p, forests f
-        where st_intersects(p.way, f.way)
+        select ST_AsGeoJSON(ST_Transform(prk.way, 4326))::json from walkpaths p, parks prk
+        where st_intersects(p.way, prk.way)
             """)
+        listt = []
+        while True:
+            row = cur.fetchone()
+            if row == None:
+                break
+            else:
+                listt.append(row[0])
+                print("%s" % row[0]) 
+        reply = json.dumps(listt)
+        return reply 
+
+
+@cherrypy.expose
+class Parks_water(object):
+
+    def GET(self, distance=None):
+        if distance == None:
+            distance = 0
+        distance = str(distance)
+        conn = psycopg2.connect("dbname=gisproject user=floofy")
+        cur = conn.cursor()
+        cur.execute("""
+        with rivers as (
+                select name, water, waterway, way from public.planet_osm_line
+                where water != ''
+                or waterway != ''
+                union
+                select name, water, waterway, way from public.planet_osm_polygon
+                where water != ''
+                or waterway != ''
+                ),
+        parks as (
+                select name, way, leisure from public.planet_osm_polygon
+                where leisure = 'park'
+                )
+        select ST_AsGeoJSON(ST_Transform(p.way, 4326))::json from rivers r, parks p
+        where ST_DWithin(p.way, r.way, '{0}')
+            """.format(distance))
         listt = []
         while True:
             row = cur.fetchone()
@@ -187,6 +224,12 @@ cherrypy.tree.mount(
     }
 )
 
+cherrypy.tree.mount(
+    Parks_water(), '/api/parks_water',
+    {'/':
+        {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
+    }
+)
 
 if __name__ == '__main__':
     conf = {

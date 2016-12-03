@@ -24,6 +24,8 @@
 <div id="inputs_all_id" class="map-overlay top container">
     <div class="map-overlay-inner row">
         <div>
+            <h4>Date Helper</h4>
+        <div>
             <h8>Aktualna pozicia:</h8>
             <p id="location_id"></p>
         </div>
@@ -39,18 +41,20 @@
             <div class="tab-pane fade" role="tabpanel" id="shop">
                 <div class="container">
                     <div>
-                        <label>Shops options</label>
+                        <label>Výber obchodov</label>
                         <form>
                             <div>
                             <label><input type="checkbox" id="chs01" value="supermarket">Supermarket</label>
                             <label><input type="checkbox" id="chs02" value="newsagent">Trafika</label>
                             <label><input type="checkbox" id="chs03" value="flowers">Kvety</label>
                             <label><input type="checkbox" id="chs04" value="gas">Pumpa</label>
+                            <!--
                             <input id="ex6" type="text">
                             <label> Vzdialenosť v metroch</label>
+                            -->
 
                             </div>
-                        <button type="button" class="btn btn-default" id="btn_shop">Find</button>
+                        <button type="button" class="btn btn-default" id="btn_shop">Nájdi</button>
                         </form>
                         <!-- 
                         <input id="sld_distance" data-slider="slider_distance" data-slider-id="Distance1Sld" type="text" data-slider-min="100" data-slider-max="3000" data-slider-step="100" data-slider-value="500"/>
@@ -63,8 +67,17 @@
             <div class="tab-pane fade" role="tabpanel" id="parks">
                 <div class="container">
                     <div>
-                        <label>Parks</label>
-                        <button type="button" class="btn btn-default" id="btn_parks">Find</button>
+                        <label>Parky</label>
+                        <div>
+                        <label>Nájdi všetky parky s chodníkom pre chodcov.</label>
+                        <button type="button" class="btn btn-default" id="btn_parks">Nájdi</button>
+                        </div>
+                        <div>
+                        <label>Nájdi všetky parky v zdialenosti X od vodnej plochy.</label>
+                        <input id="input_dist_water_parks" type="text">
+                        <label> Vzdialenosť v metroch</label>
+                        <button type="button" class="btn btn-default" id="btn_parks_water">Nájdi</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,7 +85,7 @@
                 <div class="container">
                     <div>
                         <label>Stuff</label>
-                        <button type="button" class="btn btn-default" id="btn_stuff">Find</button>
+                        <button type="button" class="btn btn-default" id="btn_stuff">Nájdi</button>
                     </div>
                 </div>
             </div>
@@ -80,7 +93,6 @@
     </div>
 </div>
 <script type="text/javascript" src="static/js/map.js"></script>
-<script type="text/javascript" src="static/js/geoloc.js"></script>
 <script type="text/javascript" src="static/js/boots.js"></script>
 </body>
 </html>
